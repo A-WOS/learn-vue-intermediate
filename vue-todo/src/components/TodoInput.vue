@@ -1,9 +1,12 @@
 <template>
-  <div>
+  <div class="inputBox shadow">
     <!-- v-model: input에 입력된 
     테스트 값을 동적으로 뷰인스턴스 안에 매핑 -->
     <input type="text" v-model="newTodoItem">
-    <button v-on:click="addTodo">add</button>
+    <!-- <button v-on:click="addTodo">add</button> -->
+    <span class="addContainer" v-on:click="addTodo">
+      <i class="fa-solid fa-plus addBtn"></i>
+    </span>
   </div>
 </template>
 
@@ -30,6 +33,29 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+input:foucs {
+  outline: none;
+}
+.inputBox {
+  background: white;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+}
+.inputBox input {
+  border-style: none;
+  font-size: 0.9rem;
+}
+.addContainer {
+  float: right;
+  background: linear-gradient(to right, #6478FB, #8763FB);
+  display: block;
+  width: 3rem;
+  border-radius: 0 5px 5px 0;
+}
+.addBtn {
+  color: white;
+  vertical-align: middle;
+}
 </style>
