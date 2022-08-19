@@ -1,12 +1,17 @@
 <template>
   <div class="clearAllContainer">
-    <span class="clearAllBtn">Clear All</span>
+    <span class="clearAllBtn" v-on:click="clearTodo">Clear All</span>
   </div>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    clearTodo() {
+      // 모든 데이터가 삭제
+      localStorage.clear();
+    }
+  }
 }
 </script>
 
