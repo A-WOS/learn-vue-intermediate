@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <span>Clear All</span>
+  <div class="clearAllContainer">
+    <span class="clearAllBtn">Clear All</span>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .clearAllContainer {
   width: 8.5rem;
   height: 50px;

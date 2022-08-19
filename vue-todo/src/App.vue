@@ -35,7 +35,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 body {
   text-align: center;
   background-color: #F6F6F6;
