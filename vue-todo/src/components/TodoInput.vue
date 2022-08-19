@@ -5,7 +5,7 @@
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
     <!-- <button v-on:click="addTodo">add</button> -->
     <span class="addContainer" v-on:click="addTodo">
-      <i class="fa-solid fa-plus addBtn"></i>
+      <em class="fa-solid fa-plus addBtn"></em>
     </span>
   </div>
 </template>
@@ -19,11 +19,17 @@ export default {
   },
   methods: {
     addTodo: function () {
-      // console.log(this.newTodoItem);
-      // 저장하는 로직
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput();
-      
+      if (this.newTodoItem !== '') {
+        // text가 체크되어있는지의 값, 텍스트값
+        const obj = { completed: false, item: this.newTodoItem };
+        // console.log(this.newTodoItem);
+        // 저장하는 로직
+        // localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        // obj만 넣으면 안에 어떤값이 있는지를 모르기때문에 JSON.stringfiy작업을 해줘야됨
+        // localStorage.setItem(this.newTodoItem, obj);
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.clearInput();
+      }
     },
     clearInput: function () {
       // 입력하고 add눌렀을시 input박스에 기존값을 비움
@@ -34,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-input:foucs {
+input:focus {
   outline: none;
 }
 .inputBox {
