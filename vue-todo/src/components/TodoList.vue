@@ -3,7 +3,8 @@
     <!-- ul>li*3 -->
     <ul>
       <!-- <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow"> -->
-      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+      <li v-for="(todoItem, index) in todoItems"
+          v-bind:key="todoItem.item" class="shadow">
         <!-- {checkBtnCompleted: todoItem.completed} 해당값이
         True면 {checkBtnCompleted}
         False면 아무것도 나타나지 않음 -->
@@ -13,11 +14,13 @@
             v-on:click="toggleComplete(todoItem, index)"
         ></em>
         <!-- 객체로 받아왔기 때문에 해당 속성을 불러오기 위해 .item -->
-        <span v-bind:class="{textCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)">
+        <span v-bind:class="{textCompleted: todoItem.completed}"
+              v-on:click="toggleComplete(todoItem, index)">
           {{ todoItem.item }}
         </span>
         <!-- <span class="removeBtn" v-on:click="removeTodo"> -->
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn"
+              v-on:click="removeTodo(todoItem, index)">
           <em class="fa-solid fa-trash-can"></em>
         </span>
       </li>
@@ -35,7 +38,7 @@ export default {
   },
   methods: {
     // removeTodo: function () {
-    removeTodo: function(todoItem, index) {
+    removeTodo: function (todoItem, index) {
       // console.log('remove items');
       console.log(todoItem, index);
       // 로컬 스토리지(db)와 스크립트(html)창은 독립적이기에
@@ -43,13 +46,17 @@ export default {
       // script에서 splice로 해당 index를 1만큼 제거하면 됨.
       // splice - 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 
       //          배열의 내용을 변경
+      // localStorage.removeItem(todoItem);
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
-    toggleComplete: function(todoItem) {
+    toggleComplete: function (todoItem) {
       // console.log(todoItem);
       // console.log(index);
       todoItem.completed = !todoItem.completed;
+      // 로컬 스토리지의 데이터를 갱신
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   // created() { // same code
