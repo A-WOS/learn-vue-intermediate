@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <Todo-Header></Todo-Header>
-    <Todo-Input></Todo-Input>
-    <Todo-List></Todo-List>
-    <Todo-Footer></Todo-Footer>
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -26,16 +26,16 @@ import TodoFooter from './components/TodoFooter.vue'
 
 export default {
   components: {
-    "Todo-Header": TodoHeader,
-    "Todo-Input": TodoInput,
-    "Todo-List": TodoList,
-    "Todo-Footer": TodoFooter,
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter,
   }
 }
 
 </script>
 
-<style>
+<style scoped>
 body {
   text-align: center;
   background-color: #F6F6F6;
