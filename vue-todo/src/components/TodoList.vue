@@ -3,7 +3,7 @@
     <!-- ul>li*3 -->
     <ul>
       <!-- <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow"> -->
-      <li v-for="(todoItem, index) in todoItems"
+      <li v-for="(todoItem, index) in propsdata"
           v-bind:key="todoItem.item" class="shadow">
         <!-- {checkBtnCompleted: todoItem.completed} 해당값이
         True면 {checkBtnCompleted}
@@ -31,11 +31,13 @@
 <script>
 
 export default {
-  data: function () {
-    return {
-      todoItems: []
-    }
-  },
+  // App.vue 로 이동
+  // data: function () {
+  //   return {
+  //     todoItems: []
+  //   }
+  // },
+  props: ['propsdata'],
   methods: {
     // removeTodo: function () {
     removeTodo: function (todoItem, index) {
@@ -59,20 +61,21 @@ export default {
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
-  // created() { // same code
-  created: function () {
-    if (localStorage.length > 0) {
-      // var 대신 let, const 사용 - 호이스팅 관련
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          // this.todoItems.push(localStorage.key(i));
-          // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-        }
-        // console.log(localStorage.key(i));
-      }
-    }
-  }
+  // App.vue 로 이동
+  // created: function () {
+  //   if (localStorage.length > 0) {
+  //     // var 대신 let, const 사용 - 호이스팅 관련
+  //     for (let i = 0; i < localStorage.length; i++) {
+  //       if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+  //         // this.todoItems.push(localStorage.key(i));
+  //         // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+  //         this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+  //       }
+  //       // console.log(localStorage.key(i));
+  //     }
+  //   }
+  // }
+
 }
 </script>
 
