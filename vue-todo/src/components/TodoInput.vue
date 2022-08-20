@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import getDate from "../assets/commonJs/getDate";
+
 export default {
   data: function () {
     return {
@@ -21,11 +23,10 @@ export default {
     addTodo: function () {
       if (this.newTodoItem !== '') {
         // text가 체크되어있는지의 값, 텍스트값
-        const obj = { completed: false, item: this.newTodoItem };
-        // console.log(this.newTodoItem);
-        // 저장하는 로직
-        // localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        const obj = { completed: false, item: this.newTodoItem, time: getDate().date};
+        // console.log(typeof obj.time); --> number
         // obj만 넣으면 안에 어떤값이 있는지를 모르기때문에 JSON.stringfiy작업을 해줘야됨
+        // stringify 작업을 하면 Object를 Json문자열로 바꿔줌.
         // localStorage.setItem(this.newTodoItem, obj);
         localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
         this.clearInput();
