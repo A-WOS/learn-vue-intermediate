@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-<!--    <TodoInput v-on=하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명"></TodoInput>-->
+    <!--    <TodoInput v-on=하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명"></TodoInput>-->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!--    <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 이름"></TodoList>-->
     <TodoList v-bind:propsdata="todoItems"
@@ -29,18 +29,18 @@ export default {
     }
   },
   methods: {
-    addOneItem(todoItem){
+    addOneItem(todoItem) {
       // TodoInput 에 있었을 때는 this.newTodoItem 이 유효하기 때문에 인자를 받아서 해줘야됌
-      const obj = { completed: false, item: todoItem, time: getDate().date};
+      const obj = {completed: false, item: todoItem, time: getDate().date};
       // 로컬 스토리지의 목록과 화면에 있는 파일 목록이 동기화 됨.
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem(todoItem, index){
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem(todoItem, index){
+    toggleOneItem(todoItem, index) {
       // propsdata 를 TodoList.vue 로 내리고 toggleComplete 에서 다시 올려서 받아오기 때문에
       // 좋지 않은 코드다. 따라서 App.vue 에서 todoItems 에서 바로 받아오기 위해 코드를 수정한다.
       // todoItem.completed = !todoItem.completed;
@@ -50,12 +50,18 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItems(){
+    clearAllItems() {
       // 모든 데이터가 삭제
       localStorage.clear();
       // 로컬 스토리지만 비우고 배열은 비우지 않았기 때문에 코드 추가
       this.todoItems = [];
-    }
+    },
+    // 새로 고침시 입력된 순이 아닌 랜덤한 순으로 정렬이 되어 필요
+    sortTodoOldest() {
+      this.todoItems.sort(function (a, b) {
+        return a.time - b.time;
+      });
+    },
   },
   // TodoList.vue 에서 App.vue 로 이동
   // created() { // same code
@@ -67,6 +73,7 @@ export default {
           this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
         }
       }
+      this.sortTodoOldest();
     }
   },
   components: {
