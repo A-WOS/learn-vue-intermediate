@@ -4,7 +4,10 @@
 <!--    <TodoInput v-on=하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명"></TodoInput>-->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!--    <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 이름"></TodoList>-->
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
+    <TodoList v-bind:propsdata="todoItems"
+              v-on:removeItem="removeOneItem"
+              v-on:toggleItem="toggleOneItem"
+    ></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -36,6 +39,16 @@ export default {
     removeOneItem(todoItem, index){
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
+    },
+    toggleOneItem(todoItem, index){
+      // propsdata 를 TodoList.vue 로 내리고 toggleComplete 에서 다시 올려서 받아오기 때문에
+      // 좋지 않은 코드다. 따라서 App.vue 에서 todoItems 에서 바로 받아오기 위해 코드를 수정한다.
+      // todoItem.completed = !todoItem.completed;
+      // console.log(this.todoItems[index].completed);
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      // 로컬 스토리지의 데이터를 갱신
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   // TodoList.vue 에서 App.vue 로 이동
@@ -45,11 +58,8 @@ export default {
       // var 대신 let, const 사용 - 호이스팅 관련
       for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          // this.todoItems.push(localStorage.key(i));
-          // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
           this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
         }
-        // console.log(localStorage.key(i));
       }
     }
   },
