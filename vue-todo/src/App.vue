@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+<!--    <TodoInput v-on=하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명"></TodoInput>-->
+    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!--    <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 이름"></TodoList>-->
     <TodoList v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
@@ -9,27 +10,28 @@
 </template>
 
 <script>
+// 등록된 순으로 정렬하기 위하여 import
+import getDate from "@/assets/commonJs/getDate";
+
 import TodoHeader from './components/TodoHeader.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
-
-// var my_cmp = {
-//   template: '<div>my component</div>'
-// };
-
-// new Vue({
-//   el: '',
-//   components: {
-//     'my-cmp': my_cmp
-//   }
-// });
 
 export default {
   // TodoList.vue 에서 App.vue 로 이동
   data() {
     return {
       todoItems: []
+    }
+  },
+  methods: {
+    addOneItem(todoItem){
+      // TodoInput 에 있었을 때는 this.newTodoItem 이 유효하기 때문에 인자를 받아서 해줘야됌
+      const obj = { completed: false, item: todoItem, time: getDate().date};
+      // 로컬 스토리지의 목록과 화면에 있는 파일 목록이 동기화 됨.
+      localStorage.setItem(todoItem, JSON.stringify(obj));
+      this.todoItems.push(obj);
     }
   },
   // TodoList.vue 에서 App.vue 로 이동
