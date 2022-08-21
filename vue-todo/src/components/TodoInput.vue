@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import getDate from "../assets/commonJs/getDate";
-
 export default {
   data: function () {
     return {
