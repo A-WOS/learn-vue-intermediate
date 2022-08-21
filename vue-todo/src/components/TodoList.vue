@@ -31,50 +31,21 @@
 <script>
 
 export default {
-  // App.vue 로 이동
-  // data: function () {
-  //   return {
-  //     todoItems: []
-  //   }
-  // },
   props: ['propsdata'],
   methods: {
     // removeTodo: function () {
     removeTodo: function (todoItem, index) {
-      // console.log('remove items');
-      console.log(todoItem, index);
-      // 로컬 스토리지(db)와 스크립트(html)창은 독립적이기에
-      // 실시간으로 삭제되는것을 보고 싶다면 LocalStorage에서 지워주고
-      // script에서 splice로 해당 index를 1만큼 제거하면 됨.
-      // splice - 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 
-      //          배열의 내용을 변경
-      // localStorage.removeItem(todoItem);
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
+      // 상위 컴포넌트로 실질적인 조작 기능이 올라갔기 때문에
+      this.$emit('removeItem', todoItem, index)
+
     },
     toggleComplete: function (todoItem) {
-      // console.log(todoItem);
-      // console.log(index);
       todoItem.completed = !todoItem.completed;
       // 로컬 스토리지의 데이터를 갱신
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
-  // App.vue 로 이동
-  // created: function () {
-  //   if (localStorage.length > 0) {
-  //     // var 대신 let, const 사용 - 호이스팅 관련
-  //     for (let i = 0; i < localStorage.length; i++) {
-  //       if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-  //         // this.todoItems.push(localStorage.key(i));
-  //         // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-  //         this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-  //       }
-  //       // console.log(localStorage.key(i));
-  //     }
-  //   }
-  // }
 
 }
 </script>

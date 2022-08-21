@@ -4,7 +4,7 @@
 <!--    <TodoInput v-on=하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명"></TodoInput>-->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!--    <TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 이름"></TodoList>-->
-    <TodoList v-bind:propsdata="todoItems"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -32,6 +32,10 @@ export default {
       // 로컬 스토리지의 목록과 화면에 있는 파일 목록이 동기화 됨.
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
+    },
+    removeOneItem(todoItem, index){
+      localStorage.removeItem(todoItem.item);
+      this.todoItems.splice(index, 1);
     }
   },
   // TodoList.vue 에서 App.vue 로 이동
