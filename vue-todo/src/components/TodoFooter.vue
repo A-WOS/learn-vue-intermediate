@@ -8,8 +8,7 @@
 export default {
   methods: {
     clearTodo() {
-      // 모든 데이터가 삭제
-      localStorage.clear();
+      this.$emit('clearAll')
     }
   }
 }

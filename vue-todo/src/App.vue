@@ -8,7 +8,7 @@
               v-on:removeItem="removeOneItem"
               v-on:toggleItem="toggleOneItem"
     ></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
 
@@ -49,6 +49,12 @@ export default {
       // 로컬 스토리지의 데이터를 갱신
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
+    clearAllItems(){
+      // 모든 데이터가 삭제
+      localStorage.clear();
+      // 로컬 스토리지만 비우고 배열은 비우지 않았기 때문에 코드 추가
+      this.todoItems = [];
     }
   },
   // TodoList.vue 에서 App.vue 로 이동
