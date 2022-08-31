@@ -81,17 +81,9 @@
  * these styles.
  */
 
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
+  opacity: 0;
   transform: scale(1.1);
 }
 </style>
