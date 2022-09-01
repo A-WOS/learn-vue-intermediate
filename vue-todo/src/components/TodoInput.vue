@@ -16,6 +16,16 @@
       <h3 slot="header">
         경고!
       </h3>
+
+      <!-- 과제 -->
+      <!-- 바디 : 무언가를 입력하세요. -->
+      <h3 slot="body">
+        무언가를 입력하세요.
+      </h3>
+      <!-- 푸터 : copy right -->
+      <h3 slot="footer">
+        copy right
+      </h3>
     </Modal>
 
   </div>
