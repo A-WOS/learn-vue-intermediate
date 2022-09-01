@@ -3,19 +3,21 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
+          <!--     모달 컴포넌트를 쓰는 상위 컴포넌트에서 재정의를 할 수 있음     -->
+          <!--     모달 헤더     -->
           <div class="modal-header">
             <slot name="header">
               default header
             </slot>
           </div>
-
+          <!--     모달 바디     -->
           <div class="modal-body">
             <slot name="body">
               default body
             </slot>
           </div>
 
+          <!--     모달 푸터     -->
           <div class="modal-footer">
             <slot name="footer">
               default footer
