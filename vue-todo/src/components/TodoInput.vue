@@ -13,7 +13,9 @@
     you can use custom content here to overwrite
     default content
     -->
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">
+        경고!
+      </h3>
     </Modal>
 
   </div>
@@ -32,18 +34,6 @@ export default {
   methods: {
     addTodo: function () {
       if (this.newTodoItem !== '') {
-        // completed : text 가 체크되어있는지의 값, 텍스트값
-        // TodoInput.vue -> App.vue 로 이동
-        // const obj = { completed: false, item: this.newTodoItem, time: getDate().date};
-        // console.log(typeof obj.time); --> number
-
-        // obj 만 넣으면 안에 어떤값이 있는지를 모르기때문에 JSON.stringfiy 작업을 해줘야됨
-        // stringify 작업을 하면 Object 를 Json 문자열로 바꿔줌.
-        // localStorage.setItem(this.newTodoItem, obj);
-
-        // TodoInput.vue -> App.vue 로 이동
-        // localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
-
         /* 입력되는 부분들이 상위 컴포넌트로 이동했기 때문에
         상위 컴포넌트로 값만 보내주면됨 */
         // this.$emit('이벤트 이름', 인자1, 인자2, ...);
@@ -52,6 +42,7 @@ export default {
       } else {
         // 입력값이 없으면 예외처리로 경고창
         // alert('type sth');
+        this.showModal = !this.showModal;
 
       }
     },
