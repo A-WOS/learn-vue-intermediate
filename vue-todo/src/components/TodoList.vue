@@ -1,14 +1,10 @@
 <template>
   <div>
-    <!-- ul>li*3 -->
-    <ul>
-      <!-- <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow"> -->
-      <li v-for="(todoItem, index) in propsdata"
-          v-bind:key="todoItem.item" class="shadow">
-        <!-- {checkBtnCompleted: todoItem.completed} 해당값이
-        True면 {checkBtnCompleted}
+    <transition-group name="list" tag="ul">
+      <!-- ul>li*3 -->
+      <li v-for="(todoItem, index) in propsdata"  v-bind:key="todoItem.item" class="shadow">
+        <!-- True면 {checkBtnCompleted}
         False면 아무것도 나타나지 않음 -->
-        <!--        -->
         <em class="checkBtn fa-solid fa-check"
             v-bind:class="{checkBtnCompleted: todoItem.completed}"
             v-on:click="toggleComplete(todoItem, index)"
@@ -18,13 +14,12 @@
               v-on:click="toggleComplete(todoItem, index)">
           {{ todoItem.item }}
         </span>
-        <!-- <span class="removeBtn" v-on:click="removeTodo"> -->
         <span class="removeBtn"
               v-on:click="removeTodo(todoItem, index)">
           <em class="fa-solid fa-trash-can"></em>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -89,5 +84,15 @@ li {
   color: #b3adad;
 }
 
+/* 리스트 아이템 트랜지션 효과 */
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
+{
+  opacity: 0;
+  transform: translateY(30px);
+}
 
 </style>
