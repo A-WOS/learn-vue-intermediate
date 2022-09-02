@@ -18,7 +18,7 @@
         <em class="closeModalBtn fas fa-times" @click="showModal = false"></em>
       </h3>
       <h3 slot="body">
-        무언가를 입력하세요.
+        아무것도 입력하지 않으셨습니다.
       </h3>
     </Modal>
 
